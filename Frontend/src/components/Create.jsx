@@ -25,7 +25,7 @@ const Create = () => {
     const navigate = useNavigate();
 
     /* ===============================
-       Fetch dropdown data on load
+            Fetch dropdown data on load
        =============================== */
     const getData = async () => {
         try {
@@ -76,15 +76,15 @@ const Create = () => {
     });
 
     /* ===============================
-       Formik Form Handling
+            Formik Form Handling
        =============================== */
     const formik = useFormik({
         initialValues: {
             name: '',
             city: '',
-            attendants: null,       
-            league: null,
-            country: null,
+            attendants: '',       
+            league: '',
+            country: '',
             characteristics: [],
             description: '',
         },
@@ -163,6 +163,7 @@ const Create = () => {
                     <Box className="form-area">
                         <TextForm
                             label="Club Name"
+                            id="name"
                             name="name"
                             value={formik.values.name}
                             onChange={formik.handleChange}
@@ -174,6 +175,7 @@ const Create = () => {
 
                         <TextForm
                             label="City"
+                            id="city"
                             name="city"
                             value={formik.values.city}
                             onChange={formik.handleChange}
@@ -186,6 +188,7 @@ const Create = () => {
                         <TextForm
                             label="Attendants"
                             name="attendants"
+                            id="attendants"
                             value={formik.values.attendants}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -198,6 +201,7 @@ const Create = () => {
                     {/* ---- Column 2 ---- */}
                     <Box className="form-area">
                         <SelectForm
+                            id="league"
                             label="League"
                             options={league}
                             name="league"
@@ -212,6 +216,7 @@ const Create = () => {
                         />
 
                         <SelectForm
+                            id="country"
                             label="Country"
                             options={country}
                             name="country"
@@ -227,9 +232,10 @@ const Create = () => {
                         />
 
                         <MultiSelectForm
+                            id="characteristics"
+                            name="characteristics"
                             label="Characteristics"
                             options={characteristics}
-                            name="characteristics"
                             value={formik.values.characteristics}
                             onChange={(field, value) =>
                                 formik.setFieldValue(field, value)
@@ -244,6 +250,7 @@ const Create = () => {
                     <Box className="form-area">
                         <DescriptionForm
                             label="Description"
+                            id="description"
                             rows={9}
                             name="description"
                             value={formik.values.description}

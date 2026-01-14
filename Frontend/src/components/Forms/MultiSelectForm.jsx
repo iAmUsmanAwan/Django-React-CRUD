@@ -22,25 +22,31 @@ const MenuProps = {
 };
 
 
-export default function MultiSelectForm({ label, options, value, name, onChange, onBlur, error, helperText }) {
-  const theme = useTheme();
-
+export default function MultiSelectForm({
+  id,
+  label,
+  options,
+  value,
+  name,
+  onChange,
+  onBlur,
+  error,
+  helperText,
+}) {
   return (
-    <FormControl fullWidth>
-      <InputLabel>{label}</InputLabel>
-      <Select
-        multiple
+    <FormControl fullWidth error={Boolean(error)}>
+      <InputLabel id={`${id}-label`}>{label}</InputLabel>
 
-        value={value}
+      <Select
+        labelId={`${id}-label`}
+        id={id}
+        multiple
+        value={value ?? []}   /* ✅ prevent null */
         name={name}
         onChange={(event) => {
           onChange(name, event.target.value);
         }}
         onBlur={onBlur}
-
-        error={error}
-        helperText={helperText}
-
         input={<OutlinedInput label={label} />}
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -53,15 +59,15 @@ export default function MultiSelectForm({ label, options, value, name, onChange,
         MenuProps={MenuProps}
       >
         {options.map((option) => (
-          <MenuItem
-            key={option.id}
-            value={option.id}
-          >
+          <MenuItem key={option.id} value={option.id}>
             {option.name}
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText error={error}>{helperText}</FormHelperText>
+
+      {helperText && (
+        <FormHelperText>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 }

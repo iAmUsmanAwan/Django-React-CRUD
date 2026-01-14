@@ -7,7 +7,7 @@ export default function TextForm({label, value, name, onChange, onBlur, error, h
         label={label} 
         variant="outlined" 
         
-        value={value} 
+        value={value ?? ''}  /* ✅ prevent null */ 
         name={name}
         onChange={onChange}
         onBlur={onBlur}
