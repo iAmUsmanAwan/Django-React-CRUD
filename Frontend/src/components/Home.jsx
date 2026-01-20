@@ -5,6 +5,7 @@ import { MaterialReactTable } from 'material-react-table';
 import axios_instance from './Axios'; // make sure this is your axios instance
 import {Link} from 'react-router-dom';
 import EditDocumentIcon from '@mui/icons-material/EditDocument';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Home = () => {
     // ✅ Define state for data
@@ -77,6 +78,15 @@ const Home = () => {
                         >
                         <EditDocumentIcon />
                     </IconButton>
+
+                <IconButton
+                        color="error"
+                        component={Link}
+                        to={`/delete/${row.original.id}`}
+                        >
+                        <DeleteIcon />
+                    </IconButton>
+
                 </Box>
             )
         }

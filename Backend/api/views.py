@@ -42,11 +42,6 @@ class FootballClubViewSet(viewsets.ModelViewSet):
     queryset = FootballClub.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = FootballClubSerializer
-
-    # def list(self, request):
-    #     queryset = FootballClub.objects.all()
-    #     serializer = self.serializer_class(queryset, many=True)
-    #     return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -73,3 +68,7 @@ class FootballClubViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
+    def destroy(self, request, pk=None):
+        queryset = self.queryset.get(pk=pk)
+        queryset.delete()
+        return Response(status=204)
